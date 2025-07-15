@@ -27,7 +27,7 @@ interface SidebarItemProps {
     icon: LucideIcon|IconType;
     variant?: VariantProps<typeof sidebarItemVariants>["variant"];
 
-}; 
+};
 export const SidebarItem = ({
     label,
     id,
@@ -45,7 +45,6 @@ export const SidebarItem = ({
         <Link href={`/workspace/${workspaceId}/channel/${id}`}>
             <Icon className="size-3.5 mr-1 shrink-0"></Icon>
             <span className="text-sm truncate">{label}</span>
-            
         </Link>
        </Button>
     );
