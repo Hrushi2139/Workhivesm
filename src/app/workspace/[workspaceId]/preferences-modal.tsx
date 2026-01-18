@@ -56,7 +56,6 @@ export const PreferencesModal=({
                 toast.success("Workspace Removed");
                 setEditOpen(false);
                  router.replace("/")
-                // close the thing
             },
             onError:()=>{
                 toast.error("Failed to Remove workspace")
@@ -77,7 +76,6 @@ export const PreferencesModal=({
                
                 toast.success("Workspace updated");
                 setEditOpen(false);
-                // close the thing
             },
             onError:()=>{
                 toast.error("Failed to update workspace")
