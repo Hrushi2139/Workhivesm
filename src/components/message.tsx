@@ -12,6 +12,7 @@ import { useRemoveMessage } from "@/features/messages/api/use-remove-message";
 import { useConfirm } from "@/hooks/use-confirm";
 import { useToggleReaction } from "@/features/reactions/api/use-toggle-reaction";
 import { Reactions } from "./reactions";
+import { usePanel } from "@/hooks/use-panel";
 // import Toolbar from "quill/modules/toolbar";
 const Renderer = dynamic(()=>import("@/components/renderer"),{ssr: false});
 const Editor=dynamic(()=>import("@/components/editor"),{ssr:false});
@@ -63,6 +64,7 @@ export const Message=({
 
 
 }:MessageProps)=>{
+    const {parentMessageId,onOpenMessage,onClose} = usePanel();
     const [ConfirmDialog,confirm]= useConfirm(
         "Delete Message",
         "Are you sure you want to delete this message?"
@@ -87,6 +89,9 @@ export const Message=({
         removeMessage({id},{
             onSuccess:()=>{
                 toast.success("Message Deleted")
+                if(parentMessageId===id){
+                    onClose();
+                };
             },
             onError:()=>{
                 toast.error("Failed to delete message");
@@ -149,7 +154,7 @@ export const Message=({
                     isAuthor={isAuthor}
                     isPending={false}
                     handleEdit={()=>setEditingId(id)}
-                    handleThread={()=>{}}
+                    handleThread={()=>onOpenMessage(id)}
                     handleDelete={handleRemove}
                     handleReaction={handleReaction}
                     hideThreadButton={hideThreadButton}
@@ -218,7 +223,7 @@ return (
             isAuthor={isAuthor}
             isPending={isPending}
             handleEdit={()=>setEditingId(id)}
-            handleThread={()=>{}}
+            handleThread={()=>onOpenMessage(id)}
             handleDelete={handleRemove}
             handleReaction={handleReaction}
             hideThreadButton={hideThreadButton}
