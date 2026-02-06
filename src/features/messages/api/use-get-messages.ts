@@ -16,7 +16,8 @@
         conversationId,
         parentMessageId,
     }:UseGetMessagesProps)=>{
-        const shouldFetch = !!channelId;
+        const shouldFetch =!!channelId || !!conversationId || !!parentMessageId;
+
         const { results, status, loadMore } = usePaginatedQuery(
             api.messages.get,
             shouldFetch
