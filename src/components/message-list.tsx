@@ -8,6 +8,7 @@ import { ChannelHero } from "./channel-hero";
 import { useState } from "react";
 import { useworkspaceId } from "@/hooks/use-workspace-id";
 import { useCurrentMember } from "@/features/members/api/use-current-member";
+import { ConversationHero } from "./conversation-hero";
 
 interface MessageListProps {
   memberName?: string;
@@ -134,6 +135,13 @@ export const MessageList = ({
         <ChannelHero
           name={channelName}
           creationTime={channelCreationTime}
+        />
+      )}
+
+      {variant==="conversation" && (
+        <ConversationHero
+          name={memberName}
+          image={memberImage}
         />
       )}
     </div>
